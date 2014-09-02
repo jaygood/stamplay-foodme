@@ -1,0 +1,17 @@
+<!-- 
+  To use this widget just cut and paste in your pages the snippet below:
+    <div data-stamplay-widget="user.badge"></div>  
+-->
+
+
+{{#if user.isLogged}}
+<div class="row user-badge">
+  <div class="col-md-3">
+    <img class="pull-left" src="{{user.profileImg}}?width=80&height=80">
+  </div>
+  <div class="col-md-8 col-md-offset-1" >
+      <h4>{{user.displayName}}</h4>
+      <a href="{{logoutLink}}"> Logout</a>    
+  </div>  
+</div>
+{{/if}}

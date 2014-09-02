@@ -1,0 +1,12 @@
+<!-- 
+  To use this widget just cut and paste in your pages the snippet below:
+  
+  <div data-stamplay-widget="auth.logout"></div>
+
+-->
+
+{{#if user.isLogged}}
+<a href={{logoutUrl}} id="fb-logout-btn" class="btn btn-danger">
+    Logout
+</a>
+{{/if}}

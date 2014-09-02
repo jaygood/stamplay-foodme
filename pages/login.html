@@ -1,0 +1,29 @@
+<div class="fm-panel " ng-controller="LoginCtrl" style="text-align: center;" ng-cloak>
+
+	<div class="row">
+		<form class="form-horizontal  col-md-6 col-md-offset-3">	
+	  	<fieldset>
+				<legend>Login</legend>
+			
+				<div class="form-group">
+	        <div class="col-md-6 col-md-offset-3">
+	        	<input type="text" ng-pattern="EMAIL" class="form-control" id="email" ng-model="email" placeholder="Email" style="padding: 14px;">
+	      	</div>
+				</div>
+			
+				<div class="form-group">
+	        <div class="col-md-6 col-md-offset-3">
+	        	<input type="password" class="form-control" id="password" ng-model="password" placeholder="Password" style="padding: 14px;">
+	      	</div>
+				</div>
+			
+			  <button type="button" class="btn btn-primary" ng-click="login()">Login</button>
+
+			  <div style="margin-top:10px"><label>[[error]]</label></div>
+
+			</fieldset>
+		</form>
+	</div>
+	<a href="/registration">Not have an account? click here</a>
+
+</div>

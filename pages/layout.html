@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <link rel="shortcut icon" href="https://dh2nnm4t79uim.cloudfront.net/editor/fea0e6c/img/favicon.png">
+    <title>StamplayFood | An awesome new app</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{assetsUrl}}/assets/bootstrap.min.css" rel="stylesheet">
+    <link href="{{assetsUrl}}/assets/bootstrap-united.css" rel="stylesheet">
+    <link href="{{assetsUrl}}/assets/app.css" rel="stylesheet">
+    <script src="{{assetsUrl}}/assets/jquery-1.9.1.js"></script>
+    <script src="{{assetsUrl}}/assets/angular.min.js"></script> 
+  </head>
+
+  <body ng-app="stamplayFood">
+    <div class="container">
+      <div class="navbar" ng-controller="NavbarCtrl">
+        <div class="navbar-inner">
+          <a class="brand" href="/index">StamplayFood</a>
+          <ul class="nav">
+            <li ng-class="{active: routeIs('index')}"><a href="/index">Home</a></li>
+            <li ng-class="{active: routeIs('how-it-works')}"><a href="/how-it-works">How it works</a></li>
+          </ul>
+
+          <ul class="nav pull-right">
+            <li ng-show="logged" ng-class="{active: routeIs('logout')}"><a href="/auth/v0/logout">Logout</a></li>
+            <li ng-hide="logged" ng-class="{active: routeIs('login')}"><a href="/login">Login</a></li>
+          </ul>
+        </div>
+      </div>
+
+    {{{body}}}
+    
+    </div> 
+    
+
+    <script>
+      var _APP_ID = "{{appId}}";
+      var _APP_DOMAIN = "{{baseUrl}}";
+    </script>
+
+    <script src="{{assetsUrl}}/assets/angular-md5.js"></script> 
+    <script src="{{assetsUrl}}/assets/bootstrap.min.js"></script>  
+    <script src="{{assetsUrl}}/assets/app.js"></script>  
+    <script src="{{assetsUrl}}/assets/restaurantRating.js"></script>  
+ 
+  </body>
+</html>

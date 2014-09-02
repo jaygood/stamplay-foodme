@@ -1,0 +1,22 @@
+<!-- 
+
+	BE SURE TO HAVE CONFIGURED YOU USER COMPONENT WITH A SIGNUP SERVICE, 
+	THEN CUT AND PASTE THE RELATED WIDGET:
+
+  FACEBOOK LOGIN: 	<div data-stamplay-widget="auth.login" data-channel="facebook" data-redirect="/"></div>
+  GOOGLE LOGIN: 		<div data-stamplay-widget="auth.login" data-channel="google" data-redirect="/"></div>
+  TWITTER LOGIN: 		<div data-stamplay-widget="auth.login" data-channel="twitter" data-redirect="/"></div>
+  LINKEDIN LOGIN: 	<div data-stamplay-widget="auth.login" data-channel="linkedin" data-redirect="/"></div>
+  INSTAGRAM LOGIN: 	<div data-stamplay-widget="auth.login" data-channel="instagram" data-redirect="/"></div>
+  ANGEL LIST LOGIN: <div data-stamplay-widget="auth.login" data-channel="angellist" data-redirect="/"></div>
+  DROPBOX LOGIN: 		<div data-stamplay-widget="auth.login" data-channel="dropbox" data-redirect="/"></div>
+
+-->
+
+{{#if user.isLogged}}
+<!-- -->
+{{else}}
+<a href="{{loginUrl}}" class="btn btn-primary" >
+   Login
+</a>
+{{/if}}

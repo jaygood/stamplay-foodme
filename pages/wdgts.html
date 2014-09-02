@@ -1,0 +1,172 @@
+      <div class="jumbotron">
+        <h1>Widgets example</h1>
+        <p class="lead">These are some of the awsome available widgets.</p>
+      </div>
+      <!-- USER, USER PHOTO, GM, FORM WIDGETS -->
+      <div class="row marketing">
+
+        <!-- USER WIDGETS -->
+        <div class="row">
+          <div class="col-lg-12 text-center">        
+            <h4>User widgets</h4>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4 text-center">
+            <h5>Facebook login</h5>
+            <p><div data-stamplay-widget="auth.login" data-channel="facebook" data-redirect="/"></div></p>
+          </div>
+
+          <div class="col-lg-4 text-center">
+            <h5>User navbar badge</h5>
+            <p><div data-stamplay-widget="user.nav-badge"></div></p>
+          </div>
+
+          <div class="col-lg-4 text-center">
+            <h5>User badge</h5>
+            <p><div data-stamplay-widget="user.badge"></div></p>
+          </div>
+        </div>
+
+        <div class="row text-center">
+          
+          <!--Auth login form -->
+          <div class="col-sm-6">
+              <h5>Auth login form</h5>
+              <p><div data-stamplay-widget="auth.login-form"></div></p>
+          </div>
+          
+          <!--User navbar badge -->
+          <div class="col-sm-6">
+              <h5>Auth logout</h5>
+              <p><div data-stamplay-widget="auth.logout"></div></p>
+          </div>
+                    
+        </div>
+
+      </div>
+
+      <!-- USER PHOTO WIDGETS -->
+      <div class="row marketing">
+
+        <div class="row">
+          <div class="col-lg-12 text-center">        
+            <h4>User photo widgets</h4>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6 text-center">
+            <h5>Photo upload</h5>
+            <p><div data-stamplay-widget="photo.upload" data-album-id="default"></div>  </p>
+          </div>
+          
+          <div class="col-lg-6 text-center">
+            <h5>Photo gallery</h5>
+            <p><div data-stamplay-widget="photo.gallery" data-album-id="default"></div>  
+            </p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6 text-center">
+            <h5>Photo single view</h5>
+
+            <p><div data-stamplay-widget="photo.single-view" data-photo-id="[INSERT PHOTO OF SPECIFIC ID, OPTIONAL]"></div>
+            </p>
+          </div>
+
+          <div class="col-lg-6 text-center">
+            <h5>Photo slideshow</h5>
+            <p><div data-stamplay-widget="photo.slideshow"></div>   
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- GM WIDGETS -->
+      <div class="row marketing">
+
+        <div class="row">
+          <div class="col-lg-12 text-center">        
+            <h4>Gamification widgets</h4>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h5>Join challenge</h5>
+            <p> 
+              <div data-stamplay-widget="gm.challenge-join" data-challenge-id="[YOUR CHALLENGE ID HERE]"></div>  
+            </p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h5>Challenge Levels</h5>
+            <p> 
+              <div data-stamplay-widget="gm.challenge-levels" data-challenge-id="[YOUR CHALLENGE ID HERE]"></div> 
+            </p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h5>Leaderboard</h5>
+            <p> 
+              <div data-stamplay-widget="gm.leaderboard" data-challenge-id="[YOUR CHALLENGE ID HERE]"></div> 
+            </p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h5>User status</h5>
+            <p>
+              <div data-stamplay-widget="gm.user-status" data-challenge-id="[YOUR CHALLENGE ID HERE]"></div> 
+            </p>
+          </div>
+        </div>
+          
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h5>Current level</h5>
+            <p>
+              <div data-stamplay-widget="gm.user-current-level" data-challenge-id="[YOUR CHALLENGE ID HERE]"></div>  
+            </p>
+          </div>
+        </div>
+
+    </div>
+
+    <!-- FORM WIDGETS -->
+    <div class="row marketing">
+
+      <div class="row">
+        <div class="col-lg-12 text-center">        
+          <h4>Form widgets</h4>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h5>Form</h5>
+          <p> 
+            <div data-stamplay-widget="form.display" data-form-id="[YOUR FORM ID HERE]"></div>
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+      <!-- Javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="{{assetsUrl}}/assets/jquery-1.10.1.min.js"><\/script>')</script>
+    <script src="{{assetsUrl}}/assets/bootstrap.min.js"></script>
+    <script src="{{assetsUrl}}/assets/jquery.flexslider-min.js"></script>
+    <script src="{{assetsUrl}}/assets/main.js"></script>
