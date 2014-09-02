@@ -1,10 +1,17 @@
-angular.module('stamplayFood',['angular-md5'])
+angular.module('stamplayFood',[])
 //change interpolate symbol because create conflict with handlebars server side
 .config(function ($interpolateProvider) {
     $interpolateProvider.startSymbol('[[');
     $interpolateProvider.endSymbol(']]');
 })
-//this a user factory, use for get User Status
+
+/*
+This Factory is in charge of tracking user status via the **User** `getStatus` 
+API call and expose it to controllers who require it. 
+It acts as a simple caching layer between user status and controllers
+Whenever one or more controller on the same page are in need to know 
+the user status the API call would be effectively done only one time
+*/
 .factory('userStatus', function($http) {
     var user = {};
     return {
@@ -28,7 +35,10 @@ angular.module('stamplayFood',['angular-md5'])
       }  
     };
 })
-//this is a factory for global variables or functions
+
+/*
+This component provides access to global functionalities and variables to avoid code duplication. 
+*/
 .factory('globalVariable', function(){
   return {
     email : /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
@@ -55,7 +65,14 @@ angular.module('stamplayFood',['angular-md5'])
     }
   }
 })
-//controller for the navbar, checks the active page and the User Status 
+
+/*
+This controller is the only one present in every view of this app since it's binded 
+to the main navigation bar of the app.
+It must be able to recognize user status showing `Login/Logout` button, 
+and it is responsible of understanding the current page visited by the user 
+to highlight it on the navigation bar (check `function RouteIs`).
+*/
 .controller('NavbarCtrl',['$scope','$location','userStatus', function NavbarController($scope, $location, userStatus) {
   
   //method for setting active class in navbar
@@ -89,20 +106,21 @@ angular.module('stamplayFood',['angular-md5'])
    })
   }
 }])
-//controller for the login page
-.controller('LoginCtrl',['$scope', '$http', '$location','userStatus','md5','globalVariable', function LoginController($scope, $http ,$location, userStatus, md5, globalVariable) {
+
+/*
+This is the controller in charge to make the API call to the login endpoint for email+passowrd authentication.
+*/
+.controller('LoginCtrl',['$scope', '$http', '$location','userStatus','globalVariable', function LoginController($scope, $http ,$location, userStatus, globalVariable) {
   
   //setting regexp for email field
   $scope.EMAIL = globalVariable.email;
  
-  //login function 
-  //before send password use md5 module to encrypt it
+  //login function   
   $scope.login = function(){
      var user = {
       email: $scope.email,
       password: $scope.password
-    }
-    user.password = md5.createHash(user.password)
+    }    
     $http({method:'POST', data: user, url:'/auth/v0/local/login'})
     .success(function(data, status){
       window.location.href = '/index'
@@ -113,7 +131,7 @@ angular.module('stamplayFood',['angular-md5'])
   }
 }])
 //controller for the registration page
-.controller('RegistrationCtrl',['$scope','$http','$location','userStatus','md5','globalVariable', function RegistrationCtrl($scope, $http ,$location, userStatus, md5, globalVariable) {
+.controller('RegistrationCtrl',['$scope','$http','$location','userStatus','globalVariable', function RegistrationCtrl($scope, $http ,$location, userStatus, globalVariable) {
   
   //setting regexp for email field
   $scope.EMAIL = globalVariable.email
@@ -125,13 +143,12 @@ angular.module('stamplayFood',['angular-md5'])
         email: $scope.email,
         password: $scope.password
       }
-      user.password = md5.createHash(user.password)
+      
       var validate = { email: $scope.email }
      //first step verify email is not already used
       $http({method:'POST', data: validate, url:'/api/auth/v0/validate/email'})
       .success(function(data, status){
-        //second step register user 
-        //before send password use md5 module to encrypt it
+        //second step register user         
         $http({method:'POST', data: user, url:'/api/user/v0/users'})
         .success(function(data,status){
           window.location.href = '/index'        
@@ -146,7 +163,12 @@ angular.module('stamplayFood',['angular-md5'])
     }
   }
 }])
-//controller for restaurant list
+/*
+This controller handles the restaurant list. 
+It listens for filter selection on the home page and update 
+the list accordingly. It has also expose sorting 
+functionalities to rank restaurant by Name, rating or price.
+*/
 .controller('RestaurantCtrl',['$scope','$http','globalVariable', function RestaurantCtrl($scope, $http, globalVariable){
  
   $scope.search = {}
@@ -298,7 +320,7 @@ angular.module('stamplayFood',['angular-md5'])
   $scope.dismiss = function(){ globalVariable.hideModal('#paymentModal')}
 
   //function for checkout order
-  $scope.checkout = function(){
+  $scope.checkout = function(restaurant){
     //check if all field are not empty 
     if(Object.keys($scope.card).length != 4 || Object.keys($scope.delivery).length != 4){
       $scope.modal.error = 'All field are required'
@@ -325,6 +347,19 @@ angular.module('stamplayFood',['angular-md5'])
           $scope.cart = {};
           $scope.cart.items = []
           $scope.cart.total = 0;
+
+          var hookData = {
+            restaurant_owner_email : restaurant.owner_email,
+            order: data
+          }
+
+          $http({method:'POST',data: hookData, url:'/api/webhook/v0/ordercomplete/catch'})
+            .success(function(data, status){})
+            .error(function(data, status){
+              $scope.modal.error = 'Ops Something went Wrong'
+            })
+            
+
           setTimeout(function(){
             globalVariable.showModal('#paymentModal')
           },1000)
