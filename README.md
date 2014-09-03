@@ -26,7 +26,7 @@ We love javascript and front end framework and this time we show you how you can
 * Admins can add more restaurants and meals using the "Admin" section
 * Admins can review user's orders and manage them
 
-Best of all, we used AngularJS and Grunt to compile the assets to be compliant to the actual Stamplay apps' skeleton. Prepare to be amazed.
+Best of all, we used AngularJS :) Prepare to be amazed.
 
 
 -----------------------
