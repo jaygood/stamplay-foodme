@@ -72,20 +72,20 @@ Let's define the entities for this app, we will define **Restaurants**, **Meals*
 
 ##### Meal
 
-* Name: `name`, Type: `string`, The background image of the page
-* Name: `photo`, Type: `file`, The avatar image of the page
-* Name: `description`, Type: `string`, The title of the page
-* Name: `price`, Type: `number`, User's favorite quote
+* Name: `name`, Type: `string`, the name of the meal
+* Name: `photo`, Type: `file`, the photo of the meal
+* Name: `description`, Type: `string`, meal's description
+* Name: `price`, Type: `number`, meal's price
 
 ##### Order
 
-* Name: `email`, Type: `string`, The background image of the page
-* Name: `surname`, Type: `string`, The background image of the page
-* Name: `address`, Type: `string`, The background image of the page
-* Name: `meals`, Type: `array_string`, The avatar image of the page
-* Name: `price`, Type: `number`, The title of the page
-* Name: `delivered`, Type: `boolean`, User's favorite quote
-* Name: `notes`, Type: `string`, User's favorite quote
+* Name: `email`, Type: `string`, An email address related to the order
+* Name: `surname`, Type: `string`, Name of the user making the order
+* Name: `address`, Type: `string`, The address for order delivery
+* Name: `meals`, Type: `array_string`, the meals included in the order
+* Name: `price`, Type: `number`, the price of the order
+* Name: `delivered`, Type: `boolean`, the develivery status for the order
+* Name: `notes`, Type: `string`, Any additional note related to the order
 
 
 After setting up this Stamplay will instantly expose Restful APIs for our newly resources the following URIs: 
@@ -151,7 +151,7 @@ Action: Email - Send Email
 
 ### When a new order is submitted, notify the restaurant owner with an email
 
-Trigger : Custom Object - New
+Trigger : Custom Object - New instance
 
 Action: Email - Send Email
 
@@ -242,6 +242,16 @@ After a succesfull order we will send a POST request to the webhook `ordercomple
             .error(function(data, status){
               $scope.modal.error = 'Ops Something went Wrong'
            	})
+
+
+-----------------------
+
+
+# Managing the app
+
+Everytime you create reasource using Custom Object you can manage instances of the entities in the Admin section. This will let you to easily add edit and delete restaurant, meals and orders.
+
+![Manage Restaurant](http://blog.stamplay.com/wp-content/uploads/2014/09/Schermata-2014-09-03-alle-14.05.29.png "Manage restaurant")
 
 
 -----------------------
