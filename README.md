@@ -46,7 +46,7 @@ Go to [your account](http://editor.stamplay.com/apps) and create a new app.
 
 ## Configuring the components
 
-After creating a new app on [Stamplay](https://editor.stamplay.com) let's start by picking the component we want to use in our app that are: **User**, **Email** and **Custom Objects**.
+After creating a new app on [Stamplay](https://editor.stamplay.com) let's start by picking the component we want to use in our app that are: **User**, **Webhook**, **Email** and **Custom Objects**.
 
 Lets see one-by-one how they are configured:
 
@@ -94,6 +94,25 @@ After setting up this Stamplay will instantly expose Restful APIs for our newly 
 * `https://APPID.stamplay.com/api/cobject/v0/order`
 
 
+### Webhook
+This is a pretty new feature that we released, (read more here)[http://http://blog.stamplay.com/how-to-use-stamplay-webhooks/]. Webhooks can be a little overwhelming at first but they can be extremely powerful. The easiest way to think of webhooks is as notifications. When an event occurs, the source site makes an HTTP request to the URI configured for the webhook. At their simplest, they carry a payload of data which is usually a single record that has been created or modified.
+
+We will use this as notification system for restaurant owners by sending them an email everytime the receive an order.
+
+Here’s how to make sure you see them new payloads:
+
+* Add Webhook module to your app and create one named "ordercomplete"
+* Test it by making any request to URL created
+* Return in your Stamplay app, go in the "Webhook Admin"
+* Do you see the new values coming in? Congrats! You're using it properly :)
+
+Ps: a good service to test your webhook is (hurl)[http://hurl.it]
+
+![Webhook config](http://blog.stamplay.com/wp-content/uploads/2014/09/Schermata-2014-09-03-alle-12.41.59.png "Webhook config")
+
+
+
+
 ### Email
 This component doesn't need any setup, couldn't be easier than that ;)
 
@@ -105,27 +124,60 @@ This component doesn't need any setup, couldn't be easier than that ;)
 
 Now let's add the tasks that will define the server side of our app. For our app we want that:
 
-### When a new user submits the contact form of an About page, send an email to the page owner 
+### When a user confirm a new order, he receives an email confirm with all the details
 
-Trigger : Form - On Submit
+Trigger : Custom Object - New
 
 Action: Email - Send Email
 
 **Form submit configuration**
 
-	Form: contact form
+	Custom Object: Order
 
 **Send Email configuration**
 
-	to: {{entry.data.to}} //The recipient address taken from the form entry 
-	from: {{user.email}} //Will be replaced with logged user's email
-	name: {{entry.data.name}} //The sender's name taken from the form entry 
-	Subject: "New contact from your AboutPage!"
-	Body: {{entry.data.message}} //The sender's message taken from the form entry 
+	to: {{coinstance.email}} //The recipient address taken from the order info 
+	from: foodme@stamplay.com 
+	name: Stamplay FoodMe
+	Subject: "Thanks for ordering with Stamplay FoodMe"
+	Body: "Hi {{coinstance.surname}}, <br/> 
+			your order are : {{coinstance.meals}} <br/>
+			the final price is : {{coinstance.price}} € <br/>
+			and it will be delivered at {{coinstance.address}}<br/>
+			<br/>
+			thanks for choosing Stamplay FoodMe<br/>
+			regards"
 
 
 
+### When a new order is submitted, notify the restaurant owner with an email
 
+Trigger : Custom Object - New
+
+Action: Email - Send Email
+
+**Form submit configuration**
+
+	Webhook name: ordercomplete
+
+**Send Email configuration**
+
+	to: {{incoming.body.restaurant_owner_email}} 
+	from: foodme@stamplay.com 
+	name: Stamplay FoodMe 
+	Subject: "Thanks for ordering with Stamplay FoodMe"
+	Body: "Good news! <br/><br/>
+
+			A new order has been placed via FoodMe for your restaurant. 
+			Here are the details:<br/><br/>
+
+			Surname: {{incoming.body.order.surname}}  <br/>
+			Email: {{incoming.body.order.email}} <br/>
+			Meals: {{incoming.body.order.meals}} <br/>
+			<br/><br/>
+			Total: {{incoming.body.order.price}} <br/>
+
+			Hurry up "
 
 
 
@@ -140,28 +192,28 @@ The whole app is written in two files: `app.js` e `restaurantrating.js`
 
 ### App.js
 
-#### Factory UserStatus:
+##### Factory UserStatus:
 This Factory is in charge of tracking user status via the **User** `getStatus` API call and expose it to controllers who require it. It acts as a simple caching layer between user status and controllers
 Whenever one or more controller on the same page are in need to know the user status the API call would be effectively done only one time
 
-#### Factory globalVariable:
+##### Factory globalVariable:
 This component provides access to global functionalities and variables to avoid code duplication. 
 
-#### Controller NavbarCtrl:
+##### Controller NavbarCtrl:
 This controller is the only one present in every view of this app since it's binded to the main navigation bar of the app.
 
 It must be able to recognize user status showing `Login/Logout` button, and moreover it is responsible of understanding the current page visited by the user to highlight it on the navigation bar (check `function RouteIs`).
 
-#### Controller LoginCtrl:
+##### Controller LoginCtrl:
 This is the controller in charge to make the API call to the login endpoint for email+passowrd authentication.
 
-#### Controller RegistrationCtrl
+##### Controller RegistrationCtrl
 This controller is in charge for to make the API requests to the singup endpoint for email+passowrd authentication. 
 
-#### Controller RestaurantCtrl
+##### Controller RestaurantCtrl
 This controller handles the restaurant list. It listens for filter selection on the home page and update the list accordingly. It has also expose sorting functionalities to rank restaurant by Name, rating or price.
 
-#### Controller MenuCtrl
+##### Controller MenuCtrl
 This controller is in charge for orders and displaying menu details of the restaurant.
 `getRestaurant` retrieves params from the URL and lookup for the restaurant instance by  `_id`.
 Once loaded it:
@@ -171,23 +223,56 @@ Once loaded it:
 * `checkout` function triggers the order completion process. It validates every field before sending the data to the server.
 
 
-
-
 ### restaurantRating.js
+AngularJS directives are what controls the rendering of the HTML inside an AngularJS application. 
 
-Questo file contiene la dichiarazione di una direttiva custom  chiamata fm-rating. Questa direttiva ci permette di creare un elemento che rappresenti graficamente un voto espresso da 1 a 5 ad un oggetto. Si possono utilizzare simboli custom, dalle stelle ai dollari.
-Tale direttiva è altamente modificabile. Permette di essere in modalità readonly ovvero fornisce un dato di sola lettura. Esempio nella tabella di riepilogo dei ristoranti.
-Altra modalità è quella di fornire solamente dell'input, quindi un valore che vada da 1 a 5. Questo tipo di funzionalità viene usata nel filtraggio dei ristoranti presente in home page.
-E come ultima operazione questa direttiva è in grado di interfacciarsi anche con il server nel caso l'utente voglia esprime il suo giudizio riguardo un particolare ristorante.
+It is possible to implement your own directives too. This is what AngularJS refers to as "teaching HTML new tricks". Here a custom directive called `fm-rating` has been declard and it will display the rating controls. Rating controls are displayed to filter restaurants in the homepage or to let users assign a rating in the restaurant profile page.
 
 
+####Triggering the webhoook
+After a succesfull order we will send a POST request to the webhook `ordercomplete`  containing the order data and the restaurant owner infos  ```$scope.checkout = function(restaurant){...}```. This is easily done by the few lines showed below:
 
-## Miglioramenti possibili
-Accorpare i controller di login e registration creando una singola pagina che gestisca entrambi i casi.
-Aggiunta di login social con appropriate azioni quali post su facebook o altro.
-Modificare la gestione del carrello in modo tale che gestisca le pietanze uguali raggruppandole.
-Aggiunta di una parte di amministrazione dove sia possibile creare i ristoranti, modificare il proprio menù e vedere gli ordini.
-Aggiunta dei commenti sui ristoranti. 
 
-## Annotazioni
-Attualmente la differenza tra utente loggato e non è quella di non poter dare un giudizio ad un ristorante.
+	var hookData = {
+            restaurant_owner_email : restaurant.owner_email,
+            order: data
+          }
+
+          $http({method:'POST',data: hookData, url:'/api/webhook/v0/ordercomplete/catch'})
+            .success(function(data, status){})
+            .error(function(data, status){
+              $scope.modal.error = 'Ops Something went Wrong'
+           	})
+
+
+-----------------------
+# Cloning
+
+First, clone this repository :
+
+    git clone git@github.com:Stamplay/stamplay-foodme
+    
+Or download it as a zip file
+	
+	https://github.com/Stamplay/stamplay-aboutme/archive/master.zip 
+
+Then you need to upload the frontend files in your app and you can do it in two ways:
+
+* Copy/Upload them via the Layout section of your app on Stamplay editor
+* [Get Stamplay sync](http://cdn.stamplay.com/stamplay-sync/stamplay-sync.zip) and run **Stamplay Sync**, make it download the frontend assets of your app and then replace them with the ones you got from this repo. Stamplay Sync will upload everything for you on your app.
+
+
+-----------------------
+# Next steps
+
+Here are a few ideas for further improvement :
+
+* bring together login and registration controllers by creating a single page to handle both user login and signup
+* add social login like Facebook or Google to enrich user's identity
+* if the cart contains more occurencies of a meal, group them
+* let users to comment on the restaurants
+* _Your idea here… ?_
+
+Again, for any questions drop an email to [giuliano.iacobelli@stamplay.com](mailto:giuliano.iacobelli@stamplay.com) :)
+
+Ciao!
