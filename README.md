@@ -1,7 +1,7 @@
 # stamplay-foodme
 =======================
 
-**This project is built on the [Stamplay](https://stamplay.com) platform and [AngularJS](http://angularjs.org) to show how to build a take-out food ordering application, let's say something similar to [JustEat](http://about.me) but done in the blink of an eye.**
+**This project is built on the [Stamplay](https://stamplay.com) platform and [AngularJS](http://angularjs.org) to show how to build a take-out food ordering application, let's say something similar to [JustEat](http://justeat.com) but done in the blink of an eye.**
 
 You can test it anytime simply creating a new project on Stamplay and uploading all the frontend assets with our client or our browser based code editor. 
 
@@ -34,9 +34,10 @@ Best of all, we used AngularJS and Grunt to compile the assets to be compliant t
 
 FoodMe is built around the following building blocks
 
-* [Users](http://docs.stamplay.apiary.io/#user)
-* [Custom Objects](http://docs.stamplay.apiary.io/#customobject)
-* [Email](http://docs.stamplay.apiary.io/#email)
+* [Users](https://www.stamplay.com/docs#user)
+* [Webhooks](http://http://blog.stamplay.com/how-to-use-stamplay-webhooks/)
+* [Custom Objects](https://www.stamplay.com/docs#customobject)
+* [Email](https://www.stamplay.com/docs#email)
 
 
 ## Requirements
@@ -95,7 +96,7 @@ After setting up this Stamplay will instantly expose Restful APIs for our newly 
 
 
 ### Webhook
-This is a pretty new feature that we released, (read more here)[http://http://blog.stamplay.com/how-to-use-stamplay-webhooks/]. Webhooks can be a little overwhelming at first but they can be extremely powerful. The easiest way to think of webhooks is as notifications. When an event occurs, the source site makes an HTTP request to the URI configured for the webhook. At their simplest, they carry a payload of data which is usually a single record that has been created or modified.
+This is a pretty new feature that we released, [read more here](http://http://blog.stamplay.com/how-to-use-stamplay-webhooks/). Webhooks can be a little overwhelming at first but they can be extremely powerful. The easiest way to think of webhooks is as notifications. When an event occurs, the source site makes an HTTP request to the URI configured for the webhook. At their simplest, they carry a payload of data which is usually a single record that has been created or modified.
 
 We will use this as notification system for restaurant owners by sending them an email everytime the receive an order.
 
@@ -106,7 +107,7 @@ Here’s how to make sure you see them new payloads:
 * Return in your Stamplay app, go in the "Webhook Admin"
 * Do you see the new values coming in? Congrats! You're using it properly :)
 
-Ps: a good service to test your webhook is (hurl)[http://hurl.it]
+Ps: a good service to test your webhook is [hurl](http://hurl.it)
 
 ![Webhook config](http://blog.stamplay.com/wp-content/uploads/2014/09/Schermata-2014-09-03-alle-12.41.59.png "Webhook config")
 
