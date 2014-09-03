@@ -1,6 +1,23 @@
 'use strict';
 
-//simple directive
+
+/*
+AngularJS directives are what controls the rendering of the HTML 
+inside an AngularJS application. 
+Examples of directives are the interpolation directive ( {{ }} ), 
+the ng-repeat directive and ng-if directive.
+
+It is possible to implement your own directives too. 
+This is what AngularJS refers to as "teaching HTML new tricks". 
+This piece of code that follow show you how to do that.
+
+Here a custom directive called `fm-rating` has been 
+declard and it will display the rating controls. 
+Rating controls are displayed to filter restaurants 
+in the homepage or to let users assign a rating 
+in the restaurant profile page.
+*/
+
 angular.module('stamplayFood').directive('fmRating', function($http) {
   return {
     restrict: 'E',
