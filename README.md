@@ -62,13 +62,13 @@ Let's define the entities for this app, we will define **Restaurants**, **Meals*
 
 ##### Restaurant
 
-* Name: `name`, Type: `string`, The background image of the page
-* Name: `description`, Type: `string`, The avatar image of the page
-* Name: `cusine`, Type: `string`, The title of the page
-* Name: `photo`, Type: `file`, Text describing user's bio
-* Name: `meals`, Type: `meals`, A list of user's locations
-* Name: `price`, Type: `price`, The first RGB color for the layout
-* Name: `owner_email`, Type: `string`, The first RGB color for the layout
+* Name: `name`, Type: `string`, The name of the restaurant
+* Name: `description`, Type: `string`, The descritpion of the restaurant
+* Name: `cusine`, Type: `string`, The type of cousine for the restaurant
+* Name: `photo`, Type: `file`, The restaurant photo
+* Name: `meals`, Type: `meals`, The menu of the restaurant
+* Name: `price`, Type: `price`, The price level for this restaurant
+* Name: `owner_email`, Type: `string`, The restaurant owner email address
 
 ##### Meal
 
@@ -110,8 +110,6 @@ Here’s how to make sure you see them new payloads:
 Ps: a good service to test your webhook is [hurl](http://hurl.it)
 
 ![Webhook config](http://blog.stamplay.com/wp-content/uploads/2014/09/Schermata-2014-09-03-alle-12.41.59.png "Webhook config")
-
-
 
 
 ### Email
@@ -187,7 +185,7 @@ _______________________________
 
 ## The frontend and AngularJS
 
-The whole app is written in two files: `app.js` e `restaurantrating.js`
+The whole app is written in two files: `app.js` e `restaurantRating.js`
 **App.js** has all the controllers and two factories while **restaurantRating.js** has the directive to handle restaurant ratings.
 
 
@@ -206,10 +204,10 @@ This controller is the only one present in every view of this app since it's bin
 It must be able to recognize user status showing `Login/Logout` button, and moreover it is responsible of understanding the current page visited by the user to highlight it on the navigation bar (check `function RouteIs`).
 
 ##### Controller LoginCtrl:
-This is the controller in charge to make the API call to the login endpoint for email+passowrd authentication.
+This is the controller in charge to make the API call to the login endpoint for email+password authentication.
 
 ##### Controller RegistrationCtrl
-This controller is in charge for to make the API requests to the singup endpoint for email+passowrd authentication. 
+This controller is in charge for to make the API requests to the signup endpoint for email+password authentication. 
 
 ##### Controller RestaurantCtrl
 This controller handles the restaurant list. It listens for filter selection on the home page and update the list accordingly. It has also expose sorting functionalities to rank restaurant by Name, rating or price.
