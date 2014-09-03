@@ -14,7 +14,7 @@ Feel free to implement more cool features (see the last paragraph for ideas), co
 
 This is a demo of what you can achieve with [Stamplay](http://stamplay.com).
 
-It's somewhat a clone of [JustEat](http://justeat.com). [View demo](https://e33b72.stamplay.com)
+It's somewhat a clone of [JustEat](http://justeat.com) and here you can see it up and running [https://e33b72.stamplay.com](https://e33b72.stamplay.com)
 
 We love javascript and front end framework and this time we show you how you can create this app using [AngularJS](http://angularjs.org) to implement the client side logic. We started from the very good workshop made by Igor Minar that can be seen [here](https://github.com/IgorMinar/foodme). Here are the user stories for this example:
 
