@@ -263,7 +263,7 @@ First, clone this repository :
     
 Or download it as a zip file
 	
-	https://github.com/Stamplay/stamplay-aboutme/archive/master.zip 
+	https://github.com/Stamplay/stamplay-foodme/archive/master.zip 
 
 Then you need to upload the frontend files in your app and you can do it in two ways:
 
