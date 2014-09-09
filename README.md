@@ -1,13 +1,13 @@
 # stamplay-foodme
 =======================
 
+![FoodMe](http://2.bp.blogspot.com/-WL8GetRAOog/ULT1dTj-4PI/AAAAAAABGCg/_oSuT6xY2Uo/s1600/foodme.png "FoodMe")
+
 **This project is built on the [Stamplay](https://stamplay.com) platform and [AngularJS](http://angularjs.org) to show how to build a take-out food ordering application, let's say something similar to [JustEat](http://justeat.com) but done in the blink of an eye.**
 
 You can test it anytime simply creating a new project on Stamplay and uploading all the frontend assets with our client or our browser based code editor. 
 
 Feel free to implement more cool features (see the last paragraph for ideas), contribute to this repo or clone it to use it by your own scopes. For any question drop an email to [giuliano.iacobelli@stamplay.com](mailto:giuliano.iacobelli@stamplay.com)
-
-![FoodMe](http://2.bp.blogspot.com/-WL8GetRAOog/ULT1dTj-4PI/AAAAAAABGCg/_oSuT6xY2Uo/s1600/foodme.png "FoodMe")
 
 -----------------------
 ## FoodMe
