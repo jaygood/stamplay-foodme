@@ -256,10 +256,11 @@ functionalities to rank restaurant by Name, rating or price.
   }
   //function for get Restaurant by id
   function getRestaurant(paramValue, notlogged){
-    $http({method:'GET', url:'/api/cobject/v0/restaurant/'+paramValue}).
+    $http({method:'GET', url:'/api/cobject/v0/restaurant/' + paramValue + '?populate=true' }).
     success(function(data, status){
         $scope.restaurant = data;
-        $scope.restaurant.menuItems = []
+        //Since meals are populated 
+        $scope.restaurant.menuItems = $scope.restaurant.meals;
         var find = true;
         //if user is logged check if he already rate this restaurant 
         if(!notlogged){
@@ -271,14 +272,7 @@ functionalities to rank restaurant by Name, rating or price.
             }
           }
         }
-        //Get all meals of restaurant
-        for(var i=0;i<$scope.restaurant.meals.length; i++){
-          $http({method:'GET', url:'/api/cobject/v0/meal/'+$scope.restaurant.meals[i]}).
-            success(function(data, status){
-               //push a meal in meals array for data binding
-               $scope.restaurant.menuItems.push(data)
-            }).error(function(data, status){})
-        }
+
     }).error(function(data, status){   
       $scope.error = 'Ops something went wrong'
     })
