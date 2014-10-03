@@ -1,3 +1,4 @@
+#
 # stamplay-foodme
 =======================
 
@@ -5,7 +6,7 @@
 
 **This project is built on the [Stamplay](https://stamplay.com) platform and [AngularJS](http://angularjs.org) to show how to build a take-out food ordering application, let's say something similar to [JustEat](http://justeat.com) but done in the blink of an eye.**
 
-You can test it anytime simply creating a new project on Stamplay and uploading all the frontend assets with our client or our browser based code editor. 
+You can test it anytime simply creating a new project on Stamplay and uploading all the frontend assets with our client or our browser based code editor.
 
 Feel free to implement more cool features (see the last paragraph for ideas), contribute to this repo or clone it to use it by your own scopes. For any question drop an email to [giuliano.iacobelli@stamplay.com](mailto:giuliano.iacobelli@stamplay.com)
 
@@ -20,7 +21,7 @@ We love javascript and front end framework and this time we show you how you can
 
 * Guest users can signup with email and password
 * Sort and filter restaurants by categories, rating and pricing
-* Both logged and guest users can place an orders to listed restaurants 
+* Both logged and guest users can place an orders to listed restaurants
 * Logged users can rate restaurants
 * When an order is submitted, both restaurant owner and user are notified
 * Admins can add more restaurants and meals using the "Admin" section
@@ -52,7 +53,7 @@ After creating a new app on [Stamplay](https://editor.stamplay.com) let's start 
 Lets see one-by-one how they are configured:
 
 ### User
-the app use the classic email + password login. This is used by default by the user component as you can see from the image below. 
+the app use the classic email + password login. This is used by default by the user component as you can see from the image below.
 
 ![Local login](http://blog.stamplay.com/wp-content/uploads/2014/09/Schermata-2014-09-02-alle-16.31.04.png "Local login")
 
@@ -88,7 +89,7 @@ Let's define the entities for this app, we will define **Restaurants**, **Meals*
 * Name: `notes`, Type: `string`, Any additional note related to the order
 
 
-After setting up this Stamplay will instantly expose Restful APIs for our newly resources the following URIs: 
+After setting up this Stamplay will instantly expose Restful APIs for our newly resources the following URIs:
 
 * `https://APPID.stamplay.com/api/cobject/v0/restaurant`
 * `https://APPID.stamplay.com/api/cobject/v0/meal`
@@ -135,11 +136,11 @@ Action: Email - Send Email
 
 **Send Email configuration**
 
-	to: {{coinstance.email}} //The recipient address taken from the order info 
-	from: foodme@stamplay.com 
+	to: {{coinstance.email}} //The recipient address taken from the order info
+	from: foodme@stamplay.com
 	name: Stamplay FoodMe
 	Subject: "Thanks for ordering with Stamplay FoodMe"
-	Body: "Hi {{coinstance.surname}}, <br/> 
+	Body: "Hi {{coinstance.surname}}, <br/>
 			your order are : {{coinstance.meals}} <br/>
 			the final price is : {{coinstance.price}} € <br/>
 			and it will be delivered at {{coinstance.address}}<br/>
@@ -161,13 +162,13 @@ Action: Email - Send Email
 
 **Send Email configuration**
 
-	to: {{incoming.body.restaurant_owner_email}} 
-	from: foodme@stamplay.com 
-	name: Stamplay FoodMe 
+	to: {{incoming.body.restaurant_owner_email}}
+	from: foodme@stamplay.com
+	name: Stamplay FoodMe
 	Subject: "Thanks for ordering with Stamplay FoodMe"
 	Body: "Good news! <br/><br/>
 
-			A new order has been placed via FoodMe for your restaurant. 
+			A new order has been placed via FoodMe for your restaurant.
 			Here are the details:<br/><br/>
 
 			Surname: {{incoming.body.order.surname}}  <br/>
@@ -196,7 +197,7 @@ This Factory is in charge of tracking user status via the **User** `getStatus` A
 Whenever one or more controller on the same page are in need to know the user status the API call would be effectively done only one time
 
 ##### Factory globalVariable:
-This component provides access to global functionalities and variables to avoid code duplication. 
+This component provides access to global functionalities and variables to avoid code duplication.
 
 ##### Controller NavbarCtrl:
 This controller is the only one present in every view of this app since it's binded to the main navigation bar of the app.
@@ -207,7 +208,7 @@ It must be able to recognize user status showing `Login/Logout` button, and more
 This is the controller in charge to make the API call to the login endpoint for email+password authentication.
 
 ##### Controller RegistrationCtrl
-This controller is in charge for to make the API requests to the signup endpoint for email+password authentication. 
+This controller is in charge for to make the API requests to the signup endpoint for email+password authentication.
 
 ##### Controller RestaurantCtrl
 This controller handles the restaurant list. It listens for filter selection on the home page and update the list accordingly. It has also expose sorting functionalities to rank restaurant by Name, rating or price.
@@ -223,7 +224,7 @@ Once loaded it:
 
 
 ### restaurantRating.js
-AngularJS directives are what controls the rendering of the HTML inside an AngularJS application. 
+AngularJS directives are what controls the rendering of the HTML inside an AngularJS application.
 
 It is possible to implement your own directives too. This is what AngularJS refers to as "teaching HTML new tricks". Here a custom directive called `fm-rating` has been declard and it will display the rating controls. Rating controls are displayed to filter restaurants in the homepage or to let users assign a rating in the restaurant profile page.
 
@@ -260,10 +261,10 @@ Everytime you create reasource using Custom Object you can manage instances of t
 First, clone this repository :
 
     git clone git@github.com:Stamplay/stamplay-foodme
-    
+
 Or download it as a zip file
-	
-	https://github.com/Stamplay/stamplay-foodme/archive/master.zip 
+
+	https://github.com/Stamplay/stamplay-foodme/archive/master.zip
 
 Then you need to upload the frontend files in your app and you can do it in two ways:
 
