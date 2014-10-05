@@ -143,8 +143,11 @@ This is the controller in charge to make the API call to the login endpoint for 
         email: $scope.email,
         password: $scope.password
       }
-      
+     
       var validate = { email: $scope.email }
+     
+     
+     // TODO: Remove to service 
      //first step verify email is not already used
       $http({method:'POST', data: validate, url:'/api/auth/v0/validate/email'})
       .success(function(data, status){
@@ -333,6 +336,8 @@ functionalities to rank restaurant by Name, rating or price.
         price: $scope.cart.total,
         delivered: false
       } 
+      
+      //TODO: Remove to service
       //Post request for create order      
       $http({method:'POST',data: data, url:'/api/cobject/v0/order'}).
         success(function(data, status){
