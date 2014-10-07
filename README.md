@@ -1,13 +1,6 @@
 # stamplay-foodme
 =======================
-#FOOD
-#FOOD
-#FOOD
-#FOOD
-#FOOD
-#FOOD
-#FOOD
-#FOOD
+
 ![FoodMe](http://2.bp.blogspot.com/-WL8GetRAOog/ULT1dTj-4PI/AAAAAAABGCg/_oSuT6xY2Uo/s1600/foodme.png "FoodMe")
 
 **This project is built on the [Stamplay](https://stamplay.com) platform and [AngularJS](http://angularjs.org) to show how to build a take-out food ordering application, let's say something similar to [JustEat](http://justeat.com) but done in the blink of an eye.**
